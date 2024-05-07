@@ -5,4 +5,4 @@ from rest_framework import serializers
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = ['url', 'title', 'description', 'author', 'created_at']
+        fields = ['url', 'title', 'description', 'category', 'author', 'created_at']

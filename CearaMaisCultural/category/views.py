@@ -1,13 +1,15 @@
+from rest_framework import viewsets
+from rest_framework import mixins
 from .models import Category
-from rest_framework import permissions, viewsets
-
 from .serializers import CategorySerializer
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
     """
-    API endpoint that allows categories to be viewed or edited.
+    A viewset that provides only retrieval and listing of categories.
     """
-    queryset = Category.objects.all().order_by('name')
+
+    queryset = Category.objects.all()  # Defina o queryset aqui
     serializer_class = CategorySerializer
-    permission_classes = [permissions.IsAuthenticated]
