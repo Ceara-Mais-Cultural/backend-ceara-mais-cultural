@@ -4,11 +4,11 @@ from rest_framework import routers
 from project.views import ProjectViewSet
 from city.views import CityViewSet
 from document.views import DocumentViewSet
-from user.views import CustomUserViewSet
+from customUser.views import UserViewSet
 from category.views import CategoryViewSet
 
 router = routers.DefaultRouter()
-router.register(r"users", CustomUserViewSet)
+router.register(r"users", UserViewSet)
 router.register(r"projects", ProjectViewSet)
 router.register(r"cities", CityViewSet)
 router.register(r"documents", DocumentViewSet)
