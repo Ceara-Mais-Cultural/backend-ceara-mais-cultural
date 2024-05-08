@@ -14,4 +14,4 @@ class CityViewSet(
 
     queryset = City.objects.all().order_by("name")
     serializer_class = CitySerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
