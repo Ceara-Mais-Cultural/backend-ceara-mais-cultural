@@ -9,6 +9,7 @@ class Project(models.Model):
     author = models.ForeignKey(
         CustomUser,
         related_name="author",
+        unique=True,
         on_delete=models.CASCADE,
         limit_choices_to={"is_staff": False},
     )
