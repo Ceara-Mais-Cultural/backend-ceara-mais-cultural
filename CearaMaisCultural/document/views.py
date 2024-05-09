@@ -1,8 +1,9 @@
-from .models import Document
-from rest_framework import permissions, viewsets
+from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from django.http import FileResponse
 
+from .models import Document
 from .serializers import DocumentSerializer
 
 
@@ -13,10 +14,10 @@ class DocumentViewSet(viewsets.ModelViewSet):
 
     queryset = Document.objects.all()
     serializer_class = DocumentSerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
 
     @action(detail=True, methods=["get"])
     def view(self, request, pk=None):
         document = self.get_object()
-        # Assuming 'file' is the field containing the image file
         return FileResponse(document.file)

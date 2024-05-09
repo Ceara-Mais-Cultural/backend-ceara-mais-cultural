@@ -1,8 +1,8 @@
-from .models import City
-from rest_framework import permissions, viewsets
-from rest_framework import mixins
+from rest_framework import viewsets, mixins, permissions
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 
 from .serializers import CitySerializer
+from .models import City
 
 
 class CityViewSet(
@@ -14,4 +14,4 @@ class CityViewSet(
 
     queryset = City.objects.all().order_by("name")
     serializer_class = CitySerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]

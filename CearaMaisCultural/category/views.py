@@ -1,5 +1,6 @@
-from rest_framework import viewsets, permissions
-from rest_framework import mixins
+from rest_framework import viewsets, mixins, permissions
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+
 from .models import Category
 from .serializers import CategorySerializer
 
@@ -8,9 +9,10 @@ class CategoryViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
     """
-    A viewset that provides only retrieval and listing of categories.
+    API endpoint that allows categories to be viewed.
     """
 
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-    # permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]

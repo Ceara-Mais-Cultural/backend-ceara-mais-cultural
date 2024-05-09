@@ -6,10 +6,9 @@ from django.core.validators import MaxLengthValidator, EmailValidator
 
 class Project(models.Model):
     title = models.CharField(max_length=100, validators=[MaxLengthValidator(100)])
-    author = models.ForeignKey(
+    author = models.OneToOneField(
         CustomUser,
         related_name="author",
-        unique=True,
         on_delete=models.CASCADE,
         limit_choices_to={"is_staff": False},
     )
