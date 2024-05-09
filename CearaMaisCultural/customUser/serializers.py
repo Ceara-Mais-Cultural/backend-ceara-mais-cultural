@@ -4,7 +4,17 @@ from .models import CustomUser
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
+    city_name = serializers.CharField(source="city.name", read_only=True)
 
     class Meta:
         model = CustomUser
-        fields = ["url", "full_name", "email", "password", "cpf", "is_staff", "city"]
+        fields = (
+            "id",
+            "cpf",
+            "full_name",
+            "email",
+            "city",
+            "city_name",
+            "is_staff",
+            "date_joined",
+        )
