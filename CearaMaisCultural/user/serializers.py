@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
-from .models import CustomUser
+from .models import User
 
 
-class CustomUserSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     city_name = serializers.CharField(source="city.name", read_only=True)
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = (
             "id",
             "cpf",

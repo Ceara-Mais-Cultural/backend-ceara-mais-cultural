@@ -12,7 +12,7 @@ class CategoryViewSet(
     API endpoint that allows categories to be viewed.
     """
 
-    queryset = Category.objects.all()
+    queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]

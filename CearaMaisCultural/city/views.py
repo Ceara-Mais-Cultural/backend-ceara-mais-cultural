@@ -12,6 +12,6 @@ class CityViewSet(
     API endpoint that allows cities to be viewed.
     """
 
-    queryset = City.objects.all().order_by("name")
+    queryset = City.objects.all().order_by("id")
     serializer_class = CitySerializer
     authentication_classes = [SessionAuthentication, TokenAuthentication]

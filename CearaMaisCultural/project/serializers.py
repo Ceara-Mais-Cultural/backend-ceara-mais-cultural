@@ -21,4 +21,5 @@ class ProjectSerializer(serializers.ModelSerializer):
             "author_name",
             "promoter",
             "promoter_name",
+            "status"
         ]

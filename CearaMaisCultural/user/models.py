@@ -5,7 +5,7 @@ from django.db import models
 from city.models import City
 
 
-class CustomUserManager(BaseUserManager):
+class UserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
@@ -26,7 +26,7 @@ class CustomUserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     cpf = models.CharField(max_length=14, unique=True, validators=[RegexValidator(r'^[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}$', message='CPF inválido')])
     full_name = models.CharField(max_length=100, validators=[MaxLengthValidator(100)])
     email = models.EmailField(validators=[EmailValidator()], unique=True)
@@ -35,8 +35,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(auto_now_add=True)
 
-    objects = CustomUserManager()
+    objects = UserManager()
     USERNAME_FIELD = 'email'
 
     def __str__(self):
         return self.full_name
+    
+    class Meta:
+        verbose_name = "Usuário"
+        verbose_name_plural = "Usuários"
+        ordering = ["full_name"]

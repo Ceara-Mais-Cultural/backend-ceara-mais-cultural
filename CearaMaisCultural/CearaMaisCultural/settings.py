@@ -36,10 +36,13 @@ INSTALLED_APPS = [
     "city",
     "category",
     "document",
-    "customUser",
+    "user",
+    "event",
 ]
 
 REST_FRAMEWORK = {}
+
+APPEND_SLASH=True
 
 MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
@@ -132,4 +135,4 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-AUTH_USER_MODEL = "customUser.CustomUser"
+AUTH_USER_MODEL = "user.User"
