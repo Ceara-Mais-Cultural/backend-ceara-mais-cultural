@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "project",
     "city",
+    "neighborhood",
     "category",
     "document",
     "user",
@@ -42,7 +43,7 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {}
 
-APPEND_SLASH=True
+APPEND_SLASH = True
 
 MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
@@ -115,9 +116,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
-LANGUAGE_CODE = 'pt-BR'
+LANGUAGE_CODE = "pt-BR"
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = "America/Sao_Paulo"
 
 USE_I18N = True
 

@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins, permissions
+from rest_framework import viewsets, mixins
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 
 from .serializers import CitySerializer

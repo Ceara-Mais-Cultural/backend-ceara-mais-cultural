@@ -3,11 +3,11 @@ from user.models import User
 from category.models import Category
 from django.core.validators import MaxLengthValidator
 
-PROJECT_ANALYSIS_STATUS = {
-    "pending": "Pendente",
-    "selected": "Selecionado",
-    "declined": "Recusado",
-}
+PROJECT_ANALYSIS_STATUS = [
+    ("pending", "Pendente"),
+    ("approved", "Aprovado"),
+    ("declined", "Recusado"),
+]
 
 
 class Project(models.Model):
