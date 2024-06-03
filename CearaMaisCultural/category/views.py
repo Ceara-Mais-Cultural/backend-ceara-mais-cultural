@@ -15,4 +15,4 @@ class CategoryViewSet(
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
     authentication_classes = [SessionAuthentication, TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]

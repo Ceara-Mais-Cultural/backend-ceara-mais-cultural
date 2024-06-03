@@ -20,8 +20,6 @@ DEBUG = env("DEBUG")
 # exception if SECRET_KEY not in os.environ
 SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = ["*"]
-
 # Application definition
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -32,6 +30,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework.authtoken",
+    'django_filters',
     "project",
     "city",
     "neighborhood",
@@ -41,7 +40,9 @@ INSTALLED_APPS = [
     "event",
 ]
 
-REST_FRAMEWORK = {}
+REST_FRAMEWORK = {
+    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
+}
 
 APPEND_SLASH = True
 
@@ -56,11 +57,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8081/",
-]
-
+ALLOWED_HOSTS = ["*"]
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = ["http://*", "https://*"]
 
 ROOT_URLCONF = "CearaMaisCultural.urls"
 

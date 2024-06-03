@@ -7,7 +7,7 @@ from city.views import CityViewSet
 from neighborhood.views import NeighborhoodViewSet
 from document.views import DocumentViewSet
 from category.views import CategoryViewSet
-from user.views import UserViewSet, login
+from user.views import UserViewSet, loginView
 
 admin.site.site_title = "Ceará Mais Cultural - Adm (DEV)"
 admin.site.site_header = "Ceará mais Cultural - Administração"
@@ -22,7 +22,7 @@ router.register(r"users", UserViewSet)
 
 urlpatterns = [
     path("", include(router.urls)),
-    path('login', login),
+    path("login/", loginView),
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path('ceara-admin/', admin.site.urls),
+    path("ceara-admin/", admin.site.urls),
 ]

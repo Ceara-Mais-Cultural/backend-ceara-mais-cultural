@@ -6,7 +6,7 @@ from .models import User
 
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ("usuário", "cpf", "município", "é_mobilizador")
+    list_display = ("usuário", "cpf", "município", "é_mobilizador", 'é_comissão')
 
     def usuário(self, obj):
         return obj.full_name
@@ -17,6 +17,10 @@ class UserAdmin(admin.ModelAdmin):
     @admin.display(boolean=True)
     def é_mobilizador(self, obj):
         return obj.is_staff
+    
+    @admin.display(boolean=True)
+    def é_comissão(self, obj):
+        return obj.is_superuser
 
     def save_model(self, request, obj, form, change):
         obj.password = make_password(obj.password)
