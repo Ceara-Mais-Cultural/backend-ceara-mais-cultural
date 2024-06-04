@@ -1,4 +1,4 @@
-from .models import Project
+from .models import Project, ProjectVote
 from rest_framework import serializers
 
 
@@ -11,7 +11,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     neighborhood_name = serializers.CharField(
         source="neighborhood.name", read_only=True
     )
-    category_name = serializers.CharField(source="category.name", read_only=True)  
+    category_name = serializers.CharField(source="category.name", read_only=True)
 
     class Meta:
         model = Project
@@ -34,3 +34,8 @@ class ProjectSerializer(serializers.ModelSerializer):
             "promoter_name",
             "status"
         ]
+
+class ProjectVoteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProjectVote
+        fields = '__all__'

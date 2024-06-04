@@ -2,7 +2,7 @@ from django.forms import ValidationError
 from rest_framework.decorators import api_view
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.response import Response
-from rest_framework import status, permissions, viewsets
+from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
 from django.contrib.auth.hashers import make_password
 from django.shortcuts import get_object_or_404

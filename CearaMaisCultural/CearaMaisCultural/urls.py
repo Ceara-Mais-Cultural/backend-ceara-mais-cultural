@@ -2,7 +2,7 @@ from django.urls import include, path
 from django.contrib import admin
 from rest_framework import routers
 
-from project.views import ProjectViewSet
+from project.views import ProjectViewSet, ProjectVoteViewSet
 from city.views import CityViewSet
 from neighborhood.views import NeighborhoodViewSet
 from document.views import DocumentViewSet
@@ -14,6 +14,7 @@ admin.site.site_header = "Ceará mais Cultural - Administração"
 
 router = routers.DefaultRouter()
 router.register(r"projects", ProjectViewSet)
+router.register(r"projects-votes", ProjectVoteViewSet)
 router.register(r"cities", CityViewSet)
 router.register(r"neighborhoods", NeighborhoodViewSet)
 router.register(r"documents", DocumentViewSet)
