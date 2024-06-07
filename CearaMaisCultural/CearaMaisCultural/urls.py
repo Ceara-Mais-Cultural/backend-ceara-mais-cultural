@@ -5,7 +5,6 @@ from rest_framework import routers
 from project.views import ProjectViewSet, ProjectVoteViewSet
 from city.views import CityViewSet
 from neighborhood.views import NeighborhoodViewSet
-from document.views import DocumentViewSet
 from category.views import CategoryViewSet
 from user.views import UserViewSet, loginView
 
@@ -17,7 +16,6 @@ router.register(r"projects", ProjectViewSet)
 router.register(r"projects-votes", ProjectVoteViewSet)
 router.register(r"cities", CityViewSet)
 router.register(r"neighborhoods", NeighborhoodViewSet)
-router.register(r"documents", DocumentViewSet)
 router.register(r"categories", CategoryViewSet)
 router.register(r"users", UserViewSet)
 

@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     "city",
     "neighborhood",
     "category",
-    "document",
     "user",
     "event",
 ]
