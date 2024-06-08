@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 
 from user.models import User
-
 from .models import Project, ProjectVote
+from .filters import ProjectFilter
 from .serializers import ProjectSerializer, ProjectVoteSerializer
 
 
@@ -18,7 +18,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["author", "promoter", "city"]
+    filterset_class = ProjectFilter
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     # permission_classes = [permissions.IsAuthenticated]
 
@@ -37,8 +37,8 @@ class ProjectViewSet(viewsets.ModelViewSet):
         existing_vote = ProjectVote.objects.filter(project=project, user=user).exists()
 
         if existing_vote:
-            return Response(data=
-                {"error": "User has already voted on this project"},
+            return Response(
+                data={"error": "User has already voted on this project"},
                 status=status.HTTP_400_BAD_REQUEST,
             )
 
