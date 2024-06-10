@@ -5,9 +5,7 @@ from rest_framework import serializers
 class ProjectSerializer(serializers.ModelSerializer):
     author_name = serializers.CharField(source="author.full_name", read_only=True)
     promoter_name = serializers.CharField(source="promoter.full_name", read_only=True)
-    city_name = serializers.CharField(
-        source="city.name", read_only=True
-    )
+    city_name = serializers.CharField(source="city.name", read_only=True)
     neighborhood_name = serializers.CharField(
         source="neighborhood.name", read_only=True
     )
@@ -19,11 +17,11 @@ class ProjectSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "description",
-            'city',
-            'city_name',
-            'neighborhood',
-            'neighborhood_name',
-            'community',
+            "city",
+            "city_name",
+            "neighborhood",
+            "neighborhood_name",
+            "community",
             "location",
             "category",
             "category_name",
@@ -32,10 +30,13 @@ class ProjectSerializer(serializers.ModelSerializer):
             "author_name",
             "promoter",
             "promoter_name",
-            "status"
+            "status",
+            "image",
+            "file",
         ]
+
 
 class ProjectVoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProjectVote
-        fields = '__all__'
+        fields = "__all__"

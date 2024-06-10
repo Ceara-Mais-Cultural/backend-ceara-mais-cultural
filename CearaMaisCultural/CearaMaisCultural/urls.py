@@ -1,6 +1,8 @@
 from django.urls import include, path
 from django.contrib import admin
+from django.conf import settings
 from rest_framework import routers
+from django.conf.urls.static import static
 
 from project.views import ProjectViewSet, ProjectVoteViewSet
 from city.views import CityViewSet
@@ -25,3 +27,6 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("ceara-admin/", admin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
