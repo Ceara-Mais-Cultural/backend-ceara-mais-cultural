@@ -69,7 +69,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.fly.dev']  # <-- Updated!
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '.fly.dev']  # <-- Updated!
 
 CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
 
