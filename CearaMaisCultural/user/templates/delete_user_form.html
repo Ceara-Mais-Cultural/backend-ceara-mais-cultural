@@ -2,28 +2,140 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
-    <title>Excluir Usuário</title>
+    <title>Excluir Conta - Nome do App</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #debf9d;
+        color: #2e2e2e;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 100%;
+        text-align: center;
+        margin: 20px;
+      }
+
+      h1 {
+        color: #332510;
+      }
+
+      p {
+        margin: 10px 0;
+      }
+
+      h2 {
+        color: #c97b00;
+        margin-top: 20px;
+      }
+
+      ol,
+      ul {
+        text-align: left;
+        margin-left: 20px;
+      }
+
+      form {
+        margin-top: 20px;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+      }
+
+      input[type='email'],
+      input[type='password'] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+      }
+
+      input::placeholder {
+        color: #828282;
+      }
+
+      button {
+        background-color: #c97b00;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #b76900;
+      }
+
+      .message {
+        color: #54e85e;
+      }
+
+      .error {
+        color: #ff2424;
+      }
+
+      .errors ul {
+        color: #ff2424;
+      }
+    </style>
   </head>
   <body>
-    <h1>Excluir Usuário</h1>
-    {% if message %}
-    <p style="color: green">{{ message }}</p>
-    {% endif %} {% if error %}
-    <p style="color: red">{{ error }}</p>
-    {% endif %} {% if errors %}
-    <ul style="color: red">
-      {% for field, error_list in errors.items %}
-      <li>{{ field }}: {{ error_list|join:", " }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    <form method="post" action="">
-      {% csrf_token %}
-      <label for="email">Email:</label>
-      <input type="email" name="email" id="email" required /><br />
-      <label for="password">Senha:</label>
-      <input type="password" name="password" id="password" required /><br />
-      <button type="submit">Excluir Usuário</button>
-    </form>
+    <div class="container">
+      <h1>Excluir Conta</h1>
+      <h1>Ceará Mais Cultural</h1>
+
+      <h2>Etapas para solicitar a exclusão da conta:</h2>
+      <ol>
+        <li>Insira seu email e senha nos campos abaixo.</li>
+        <li>Clique no botão "Excluir Conta".</li>
+        <li>Você receberá uma confirmação de que sua conta foi excluída.</li>
+      </ol>
+
+      <h2>Dados que serão excluídos:</h2>
+      <p>Ao excluir sua conta, os seguintes dados serão removidos permanentemente:</p>
+      <ul>
+        <li>Informações de perfil (nome, email, CPF, CNPJ, etc.)</li>
+        <li>Suas ideias cadastradas</li>
+        <li>Seus votos em curadoria</li>
+      </ul>
+
+      <h2>Formulário de Exclusão de Conta:</h2>
+      {% if message %}
+      <p class="message">{{ message }}</p>
+      {% endif %} {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %} {% if errors %}
+      <div class="errors">
+        <ul>
+          {% for field, error_list in errors.items %}
+          <li>{{ field }}: {{ error_list|join:", " }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+      <form method="post" action="">
+        {% csrf_token %}
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Digite seu email" required />
+        <label for="password">Senha:</label>
+        <input type="password" name="password" id="password" placeholder="Digite sua senha" required />
+        <button type="submit">Excluir Conta</button>
+      </form>
+    </div>
   </body>
 </html>
