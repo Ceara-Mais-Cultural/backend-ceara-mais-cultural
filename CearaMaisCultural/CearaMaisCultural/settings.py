@@ -1,11 +1,9 @@
 from pathlib import Path
 import environ
-import os
 
 
 # ENV CONFIG
 env = environ.Env(
-    # set casting, default value
     DEBUG=(bool, False)
 )
 
@@ -41,7 +39,6 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework.authtoken",
     'django_filters',
-    
     # Apps
     "project",
     "city",
@@ -69,9 +66,10 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', env("DEV_API_URL")]  # <-- Updated!
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', env("DEV_API_URL")]
 
-CSRF_TRUSTED_ORIGINS = ['https://' + env("DEV_API_URL")]
+# CSRF_TRUSTED_ORIGINS = ['https://' + env("DEV_API_URL")]
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
 
@@ -98,7 +96,6 @@ WSGI_APPLICATION = "CearaMaisCultural.wsgi.application"
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
@@ -117,7 +114,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = "pt-BR"
 
 TIME_ZONE = "America/Sao_Paulo"
@@ -129,7 +125,6 @@ USE_TZ = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = "static/"
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # <-- Updated!
@@ -138,9 +133,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 
 AUTH_USER_MODEL = "user.User"
 
