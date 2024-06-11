@@ -69,9 +69,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '.fly.dev']  # <-- Updated!
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', env("DEV_API_URL")]  # <-- Updated!
 
-CSRF_TRUSTED_ORIGINS = ['https://*.fly.dev']
+CSRF_TRUSTED_ORIGINS = ['https://' + env("DEV_API_URL")]
 
 CORS_ALLOW_CREDENTIALS = True
 
