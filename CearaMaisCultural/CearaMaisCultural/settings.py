@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import environ
 
@@ -68,7 +69,7 @@ MIDDLEWARE = [
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', env("DEV_API_URL")]
 
-# CSRF_TRUSTED_ORIGINS = ['https://' + env("DEV_API_URL")]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8081', 'https://' + env("DEV_API_URL")]
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_CREDENTIALS = True
@@ -78,7 +79,7 @@ ROOT_URLCONF = "CearaMaisCultural.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

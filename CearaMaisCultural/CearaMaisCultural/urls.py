@@ -8,7 +8,7 @@ from project.views import ProjectViewSet, ProjectVoteViewSet
 from city.views import CityViewSet
 from neighborhood.views import NeighborhoodViewSet
 from category.views import CategoryViewSet
-from user.views import UserViewSet, loginView
+from user.views import DeleteUserView, UserViewSet, loginView
 
 admin.site.site_title = "Ceará Mais Cultural - Adm (DEV)"
 admin.site.site_header = "Ceará mais Cultural - Administração"
@@ -24,8 +24,9 @@ router.register(r"users", UserViewSet)
 urlpatterns = [
     path("", include(router.urls)),
     path("login/", loginView),
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    # path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
     path("ceara-admin/", admin.site.urls),
+     path('excluir-conta/', DeleteUserView.as_view(), name='delete-user'),
 ]
 
 if settings.DEBUG:

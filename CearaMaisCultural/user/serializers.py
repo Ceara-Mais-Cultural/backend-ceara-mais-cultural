@@ -27,3 +27,8 @@ class UserSerializer(serializers.ModelSerializer):
             "password",
         )
         extra_kwargs = {"password": {"write_only": True}}
+
+
+class DeleteUserSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True)
