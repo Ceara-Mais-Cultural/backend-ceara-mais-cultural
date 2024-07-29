@@ -5,9 +5,7 @@ from .models import Category
 from .serializers import CategorySerializer
 
 
-class CategoryViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
-):
+class CategoryViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows categories to be viewed.
     """

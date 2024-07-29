@@ -5,9 +5,7 @@ from .serializers import NeighborhoodSerializer
 from .models import Neighborhood
 
 
-class NeighborhoodViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
-):
+class NeighborhoodViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows neighborhoods to be viewed.
     """

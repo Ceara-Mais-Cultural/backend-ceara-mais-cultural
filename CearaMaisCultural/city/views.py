@@ -11,9 +11,7 @@ from .serializers import CitySerializer
 from .models import City
 
 
-class CityViewSet(
-    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
-):
+class CityViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows cities to be viewed.
     """
