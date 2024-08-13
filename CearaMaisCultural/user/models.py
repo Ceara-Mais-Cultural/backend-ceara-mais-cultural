@@ -3,7 +3,7 @@ from django.contrib.auth.models import (
     BaseUserManager,
     PermissionsMixin,
 )
-from django.core.validators import MaxLengthValidator, EmailValidator, RegexValidator
+from django.core.validators import MaxLengthValidator, RegexValidator
 from django.db import models
 
 from neighborhood.models import Neighborhood
@@ -20,17 +20,6 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password=None, **extra_fields):
-        extra_fields.setdefault("is_staff", True)
-        extra_fields.setdefault("is_superuser", True)
-
-        if extra_fields.get("is_staff") is not True:
-            raise ValueError("Superuser must have is_staff=True.")
-        if extra_fields.get("is_superuser") is not True:
-            raise ValueError("Superuser must have is_superuser=True.")
-
-        return self.create_user(email, password, **extra_fields)
-
 
 class User(AbstractBaseUser, PermissionsMixin):
     cpf = models.CharField(
@@ -46,7 +35,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(validators=[], unique=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE, default=1)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, default=1)
-    community = models.TextField(validators=[MaxLengthValidator(100)], null=True, blank=True)
+    community = models.TextField(
+        validators=[MaxLengthValidator(100)], null=True, blank=True
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
@@ -62,6 +53,17 @@ class User(AbstractBaseUser, PermissionsMixin):
             else "Mobilizador" if self.is_staff else "Agente Cultural"
         )
         return self.full_name + " - " + role
+
+    def save(self, *args, **kwargs):
+        if self.pk and not self.password.startswith("pbkdf2_sha256$"):
+            original = User.objects.get(pk=self.pk)
+            if original.password != self.password:
+                self.set_password(self.password)
+            else:
+                self.password = original.password
+        elif not self.pk and self.password:
+            self.set_password(self.password)
+        super(User, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "Usuário"

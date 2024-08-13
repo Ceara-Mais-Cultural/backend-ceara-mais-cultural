@@ -11,8 +11,8 @@ from category.views import CategoryViewSet
 from user.views import DeleteUserView, UserViewSet, loginView
 from .views import privacy_policy_view
 
-admin.site.site_title = "Ceará Mais Cultural - Adm (DEV)"
-admin.site.site_header = "Ceará mais Cultural - Administração"
+admin.site.site_title = "Ceará Mais Cultural"
+admin.site.site_header = "Administração"
 
 router = routers.DefaultRouter()
 router.register(r"projects", ProjectViewSet)
