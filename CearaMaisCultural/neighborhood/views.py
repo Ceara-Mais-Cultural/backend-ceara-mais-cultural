@@ -12,4 +12,4 @@ class NeighborhoodViewSet(viewsets.ModelViewSet):
 
     queryset = Neighborhood.objects.all().order_by("id")
     serializer_class = NeighborhoodSerializer
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    # authentication_classes = [SessionAuthentication, TokenAuthentication]

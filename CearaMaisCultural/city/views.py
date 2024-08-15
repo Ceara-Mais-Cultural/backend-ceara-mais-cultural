@@ -18,7 +18,7 @@ class CityViewSet(viewsets.ModelViewSet):
 
     queryset = City.objects.all().order_by("id")
     serializer_class = CitySerializer
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    # authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     @action(detail=True, methods=["get"])
     def neighborhoods(self, _, pk=None):
