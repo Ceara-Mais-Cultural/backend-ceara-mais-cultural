@@ -33,6 +33,12 @@
         font-size: 1.8em;
       }
 
+      h2 {
+        color: #c97b00;
+        margin-top: 10px;
+        font-size: 1.4em;
+      }
+
       label {
         display: block;
         margin: 10px 0 5px;
@@ -73,21 +79,45 @@
         margin-bottom: 10px;
       }
     </style>
+    <script>
+      function formatCPF(value) {
+        return value
+          .replace(/\D/g, '') // Remove tudo o que não é dígito
+          .replace(/(\d{3})(\d)/, '$1.$2') // Coloca um ponto entre o terceiro e o quarto dígitos
+          .replace(/(\d{3})(\d)/, '$1.$2') // Coloca outro ponto entre o sexto e o sétimo dígitos
+          .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca um hífen entre o nono e o décimo dígitos
+      }
+
+      function formatCNPJ(value) {
+        return value
+          .replace(/\D/g, '') // Remove tudo o que não é dígito
+          .replace(/(\d{2})(\d)/, '$1.$2') // Coloca um ponto entre o segundo e o terceiro dígitos
+          .replace(/(\d{3})(\d)/, '$1.$2') // Coloca outro ponto entre o quinto e o sexto dígitos
+          .replace(/(\d{3})(\d)/, '$1/$2') // Coloca uma barra entre o oitavo e o nono dígitos
+          .replace(/(\d{4})(\d{1,2})$/, '$1-$2'); // Coloca um hífen entre o 12º e o 13º dígitos
+      }
+
+      function handleCPFInput(event) {
+        const input = event.target;
+        let formattedValue = input.value.length <= 14 ? formatCPF(input.value) : formatCNPJ(input.value);
+        input.value = formattedValue;
+      }
+    </script>
   </head>
   <body>
     <div class="container">
       <h1>Ceará Mais Cultural</h1>
       <h2>Confirmar Identidade</h2>
-      {% if error %}
-      <p class="error">{{ error }}</p>
+      {% if messages %}
+      <div class="error">{% for message in messages %} {{ message }} {% endfor %}</div>
       {% endif %}
       <form method="post" action="">
         {% csrf_token %}
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" placeholder="Digite seu email" required />
 
-        <label for="cpf">CPF:</label>
-        <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF" required />
+        <label for="cpf">CPF/CNPJ:</label>
+        <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF ou CNPJ" required oninput="handleCPFInput(event)" />
 
         <button type="submit">Confirmar</button>
       </form>

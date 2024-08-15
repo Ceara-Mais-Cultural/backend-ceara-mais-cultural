@@ -89,15 +89,13 @@ class ConfirmIdentityView(View):
         email = request.POST.get("email")
         cpf = request.POST.get("cpf")
         try:
-            user = User.objects.get(
-                email=email, cpf=cpf
-            )  # Assumindo que você tem o CPF no perfil do usuário
+            user = User.objects.get(email=email, cpf=cpf)
             token = get_random_string(length=32)
             tokens[token] = user.id
             return redirect("reset_password", token=token)
         except User.DoesNotExist:
-            messages.error(request, "Email ou CPF inválido.")
-            return redirect("confirm_identity")
+            messages.error(request, "Email ou CPF/CNPJ inválido.")
+            return render(request, "confirm_identity.html")
 
 
 class ResetPasswordView(View):
