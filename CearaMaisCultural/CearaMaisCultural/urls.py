@@ -8,7 +8,7 @@ from project.views import ProjectViewSet, ProjectVoteViewSet
 from city.views import CityViewSet
 from neighborhood.views import NeighborhoodViewSet
 from category.views import CategoryViewSet
-from user.views import DeleteUserView, UserViewSet, loginView
+from user.views import DeleteUserView, UserViewSet, loginView, ConfirmIdentityView, ResetPasswordView, ResetSuccessfulView
 from .views import privacy_policy_view
 
 admin.site.site_title = "Ceará Mais Cultural"
@@ -26,8 +26,12 @@ urlpatterns = [
     path("", include(router.urls)),
     path("login/", loginView),
     path("admin/", admin.site.urls),
-    path("excluir-conta/", DeleteUserView.as_view(), name="delete-user"),
-    path("politica-privacidade/", privacy_policy_view, name="privacy-policy"),
+    path("excluir-conta/", DeleteUserView.as_view(), name="delete_user"),
+    path("politica-privacidade/", privacy_policy_view, name="privacy_policy"),
+    path('confirmar-identidade/', ConfirmIdentityView.as_view(), name='confirm_identity'),
+    path('redefinir-senha/<str:token>/', ResetPasswordView.as_view(), name='reset_password'),
+    path('senha-redefinida/', ResetSuccessfulView.as_view(), name='reset_successful'),
+
 ]
 
 if settings.DEBUG:

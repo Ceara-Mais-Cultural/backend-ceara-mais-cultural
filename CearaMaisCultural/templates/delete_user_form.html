@@ -2,6 +2,7 @@
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Excluir Conta - Ceará Mais Cultural</title>
     <style>
       body {
@@ -13,7 +14,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh;
       }
 
       .container {
@@ -22,28 +23,34 @@
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         max-width: 400px;
-        width: 100%;
+        width: 90%;
         text-align: center;
         margin: 20px;
       }
 
       h1 {
         color: #332510;
-      }
-
-      p {
-        margin: 10px 0;
+        font-size: 1.8em;
       }
 
       h2 {
         color: #c97b00;
         margin-top: 20px;
+        font-size: 1.4em;
+      }
+
+      p,
+      li {
+        margin: 10px 0;
+        font-size: 1em;
+        line-height: 1.5;
       }
 
       ol,
       ul {
         text-align: left;
         margin-left: 20px;
+        padding-left: 0;
       }
 
       form {
@@ -53,6 +60,7 @@
       label {
         display: block;
         margin: 10px 0 5px;
+        font-size: 1em;
       }
 
       input[type='email'],
@@ -62,6 +70,7 @@
         margin-bottom: 10px;
         border: 1px solid #e0e0e0;
         border-radius: 4px;
+        font-size: 1em;
       }
 
       input::placeholder {
@@ -75,6 +84,7 @@
         border: none;
         border-radius: 4px;
         cursor: pointer;
+        font-size: 1em;
       }
 
       button:hover {
@@ -83,14 +93,44 @@
 
       .message {
         color: #54e85e;
+        font-size: 1em;
       }
 
       .error {
         color: #ff2424;
+        font-size: 1em;
       }
 
       .errors ul {
         color: #ff2424;
+        padding-left: 0;
+        list-style-type: none;
+      }
+
+      /* Responsividade para telas maiores */
+      @media (min-width: 768px) {
+        .container {
+          max-width: 600px;
+          padding: 30px;
+        }
+
+        h1 {
+          font-size: 2em;
+        }
+
+        h2 {
+          font-size: 1.6em;
+        }
+
+        p,
+        li {
+          font-size: 1.1em;
+        }
+
+        button {
+          font-size: 1.1em;
+          padding: 12px 24px;
+        }
       }
     </style>
   </head>

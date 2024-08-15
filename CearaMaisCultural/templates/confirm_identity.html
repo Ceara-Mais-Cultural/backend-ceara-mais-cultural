@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirmar Identidade - Ceará Mais Cultural</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #debf9d;
+        color: #2e2e2e;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        margin: 20px;
+      }
+
+      h1 {
+        color: #332510;
+        font-size: 1.8em;
+      }
+
+      label {
+        display: block;
+        margin: 10px 0 5px;
+        font-size: 1em;
+      }
+
+      input[type='email'],
+      input[type='text'] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        font-size: 1em;
+      }
+
+      input::placeholder {
+        color: #828282;
+      }
+
+      button {
+        background-color: #c97b00;
+        color: #ffffff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1em;
+      }
+
+      button:hover {
+        background-color: #b76900;
+      }
+
+      .error {
+        color: #ff2424;
+        font-size: 1em;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Ceará Mais Cultural</h1>
+      <h2>Confirmar Identidade</h2>
+      {% if error %}
+      <p class="error">{{ error }}</p>
+      {% endif %}
+      <form method="post" action="">
+        {% csrf_token %}
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" placeholder="Digite seu email" required />
+
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF" required />
+
+        <button type="submit">Confirmar</button>
+      </form>
+    </div>
+  </body>
+</html>
