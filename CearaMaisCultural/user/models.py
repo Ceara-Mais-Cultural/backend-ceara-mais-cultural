@@ -54,17 +54,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         )
         return self.full_name + " - " + role
 
-    def save(self, *args, **kwargs):
-        if self.pk and not self.password.startswith("pbkdf2_sha256$"):
-            original = User.objects.get(pk=self.pk)
-            if original.password != self.password:
-                self.set_password(self.password)
-            else:
-                self.password = original.password
-        elif not self.pk and self.password:
-            self.set_password(self.password)
-        super(User, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = "Usuário"
         verbose_name_plural = "Usuários"
