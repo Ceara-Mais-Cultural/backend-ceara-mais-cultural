@@ -38,7 +38,7 @@ class Project(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE, default=1)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE, default=1)
     community = models.TextField(validators=[MaxLengthValidator(100)], null=True)
-    location = models.CharField(max_length=100, validators=[MaxLengthValidator(100)])
+    location = models.CharField(max_length=100, validators=[MaxLengthValidator(100)], null=True)
     file = models.FileField(upload_to="documents/", blank=True)
     image = models.ImageField(upload_to="images/", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
