@@ -58,8 +58,6 @@ class DeleteUserView(APIView):
 
 # Simples banco de dados em memória para tokens (pode ser substituído por um modelo)
 tokens = {}
-
-
 class ConfirmIdentityView(View):
     def get(self, request):
         return render(request, "confirm_identity.html")
