@@ -76,7 +76,7 @@
       .error {
         color: #ff2424;
         font-size: 1em;
-        margin-bottom: 10px;
+        margin: 15px 0 25px;
       }
     </style>
     <script>
@@ -88,19 +88,61 @@
           .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca um hífen entre o nono e o décimo dígitos
       }
 
-      function formatCNPJ(value) {
-        return value
-          .replace(/\D/g, '') // Remove tudo o que não é dígito
-          .replace(/(\d{2})(\d)/, '$1.$2') // Coloca um ponto entre o segundo e o terceiro dígitos
-          .replace(/(\d{3})(\d)/, '$1.$2') // Coloca outro ponto entre o quinto e o sexto dígitos
-          .replace(/(\d{3})(\d)/, '$1/$2') // Coloca uma barra entre o oitavo e o nono dígitos
-          .replace(/(\d{4})(\d{1,2})$/, '$1-$2'); // Coloca um hífen entre o 12º e o 13º dígitos
-      }
-
       function handleCPFInput(event) {
         const input = event.target;
-        let formattedValue = input.value.length <= 14 ? formatCPF(input.value) : formatCNPJ(input.value);
+        let formattedValue = formatCPF(input.value);
         input.value = formattedValue;
+      }
+
+      function isCPFValid(cpf) {
+        cpf = cpf.replace(/[^\d]+/g, ''); // Remove não dígitos
+        if (cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false; // Verifica formato e repetição
+
+        let soma = 0;
+        for (let i = 0; i < 9; i++) {
+          soma += parseInt(cpf.charAt(i)) * (10 - i);
+        }
+        let resto = 11 - (soma % 11);
+        if (resto === 10 || resto === 11) resto = 0;
+        if (resto !== parseInt(cpf.charAt(9))) return false;
+
+        soma = 0;
+        for (let i = 0; i < 10; i++) {
+          soma += parseInt(cpf.charAt(i)) * (11 - i);
+        }
+        resto = 11 - (soma % 11);
+        if (resto === 10 || resto === 11) resto = 0;
+        return resto === parseInt(cpf.charAt(10));
+      }
+
+      function isEmailValid(email) {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return regex.test(email);
+      }
+
+      function validateForm(event) {
+        event.preventDefault(); // Evita o envio imediato do formulário
+        const emailInput = document.getElementById('email');
+        const cpfInput = document.getElementById('cpf');
+        const errorDiv = document.querySelector('.error');
+
+        const email = emailInput.value;
+        const cpf = cpfInput.value;
+
+        errorDiv.innerHTML = ''; // Limpa erros anteriores
+
+        if (!isEmailValid(email)) {
+          errorDiv.innerHTML = 'Por favor, insira um email válido.';
+          return false;
+        }
+
+        if (!isCPFValid(cpf)) {
+          errorDiv.innerHTML = 'Por favor, insira um CPF válido.';
+          return false;
+        }
+
+        // Se tudo for válido, enviar o formulário
+        event.target.submit();
       }
     </script>
   </head>
@@ -108,16 +150,18 @@
     <div class="container">
       <h1>Ceará Mais Cultural</h1>
       <h2>Confirmar Identidade</h2>
-      {% if messages %}
-      <div class="error">{% for message in messages %} {{ message }} {% endfor %}</div>
-      {% endif %}
-      <form method="post" action="">
+      <form method="post" action="" onsubmit="validateForm(event)">
         {% csrf_token %}
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" placeholder="Digite seu email" required />
 
-        <label for="cpf">CPF/CNPJ:</label>
-        <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF ou CNPJ" required oninput="handleCPFInput(event)" />
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" id="cpf" placeholder="Digite seu CPF" required oninput="handleCPFInput(event)" />
+
+        <div class="error"></div>
+        {% if messages %}
+        <div class="error">{% for message in messages %} {{ message }} {% endfor %}</div>
+        {% endif %}
 
         <button type="submit">Confirmar</button>
       </form>

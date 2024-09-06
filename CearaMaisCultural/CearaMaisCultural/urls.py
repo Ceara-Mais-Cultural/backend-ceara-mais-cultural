@@ -8,7 +8,7 @@ from project.views import ProjectViewSet, ProjectVoteViewSet
 from city.views import CityViewSet
 from neighborhood.views import NeighborhoodViewSet
 from category.views import CategoryViewSet
-from user.views import DeleteUserView, UserViewSet, loginView, ConfirmIdentityView, ResetPasswordView, ResetSuccessfulView
+from user.views import DeleteUserView, UserViewSet, loginView, ConfirmIdentityView, ResetPasswordView, ResetSuccessfulView, UserDeletedView
 from .views import privacy_policy_view
 
 admin.site.site_title = "Ceará Mais Cultural"
@@ -31,7 +31,7 @@ urlpatterns = [
     path('confirmar-identidade/', ConfirmIdentityView.as_view(), name='confirm_identity'),
     path('redefinir-senha/<str:token>/', ResetPasswordView.as_view(), name='reset_password'),
     path('senha-redefinida/', ResetSuccessfulView.as_view(), name='reset_successful'),
-
+    path('usuario-excluido/', UserDeletedView.as_view(), name='user_DELETED'),
 ]
 
 if settings.DEBUG:

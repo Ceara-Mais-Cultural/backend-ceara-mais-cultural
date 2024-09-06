@@ -46,11 +46,7 @@ class DeleteUserView(APIView):
             user = authenticate(username=email, password=password)
             if user:
                 user.delete()
-                return render(
-                    request,
-                    "delete_user_form.html",
-                    {"message": "Usuário excluído com sucesso."},
-                )
+                return redirect("reset_successful")
             else:
                 return render(
                     request,
@@ -77,7 +73,7 @@ class ConfirmIdentityView(View):
             tokens[token] = user.id
             return redirect("reset_password", token=token)
         except User.DoesNotExist:
-            messages.error(request, "Email ou CPF/CNPJ inválido.")
+            messages.error(request, "Usuário não encontrado.")
             return render(request, "confirm_identity.html")
 
 
@@ -106,3 +102,7 @@ class ResetPasswordView(View):
 class ResetSuccessfulView(View):
     def get(self, request):
         return render(request, "reset_successful.html")
+    
+class UserDeletedView(View):
+    def get(self, request):
+        return render(request, "user_deleted.html")
