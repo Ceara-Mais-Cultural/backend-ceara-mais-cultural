@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 
 from .serializers import NeighborhoodSerializer
 from .models import Neighborhood
@@ -13,3 +14,4 @@ class NeighborhoodViewSet(viewsets.ModelViewSet):
     queryset = Neighborhood.objects.all().order_by("id")
     serializer_class = NeighborhoodSerializer
     permission_classes = [IsAdminOrReadOnly]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]

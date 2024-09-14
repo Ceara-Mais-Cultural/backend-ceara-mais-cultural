@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from CearaMaisCultural.permissions import IsAuthenticatedOrCreate
 from rest_framework.response import Response
 from rest_framework import status, viewsets
+from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.authtoken.models import Token
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.csrf import csrf_exempt
@@ -22,6 +23,8 @@ class UserViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["city", "is_staff", "is_superuser"]
     permission_classes = [IsAuthenticatedOrCreate]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
+
 
 @csrf_exempt
 @api_view(["POST"])
@@ -58,6 +61,8 @@ class DeleteUserView(APIView):
 
 # Simples banco de dados em memória para tokens (pode ser substituído por um modelo)
 tokens = {}
+
+
 class ConfirmIdentityView(View):
     def get(self, request):
         return render(request, "confirm_identity.html")
@@ -100,7 +105,8 @@ class ResetPasswordView(View):
 class ResetSuccessfulView(View):
     def get(self, request):
         return render(request, "reset_successful.html")
-    
+
+
 class UserDeletedView(View):
     def get(self, request):
         return render(request, "user_deleted.html")

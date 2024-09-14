@@ -20,6 +20,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProjectFilter
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     @action(detail=True, methods=["post"])
     def vote(self, request, pk=None):
@@ -60,3 +61,4 @@ class ProjectVoteViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["project", "user"]
     permission_classes = [IsAdminUser]
+    authentication_classes = [SessionAuthentication, TokenAuthentication]
