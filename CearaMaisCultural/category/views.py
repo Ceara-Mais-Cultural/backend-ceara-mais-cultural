@@ -1,8 +1,8 @@
-from rest_framework import viewsets, mixins, permissions
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework import viewsets, permissions
 
 from .models import Category
 from .serializers import CategorySerializer
+from CearaMaisCultural.permissions import IsAdminOrReadOnly
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -12,5 +12,5 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     queryset = Category.objects.all().order_by("id")
     serializer_class = CategorySerializer
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
-    # permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAdminOrReadOnly, permissions.IsAuthenticated]
+    

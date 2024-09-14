@@ -1,6 +1,6 @@
 from django.views import View
 from rest_framework.decorators import api_view
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from CearaMaisCultural.permissions import IsAuthenticatedOrCreate
 from rest_framework.response import Response
 from rest_framework import status, viewsets
 from rest_framework.authtoken.models import Token
@@ -21,7 +21,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["city", "is_staff", "is_superuser"]
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    permission_classes = [IsAuthenticatedOrCreate]
 
 @csrf_exempt
 @api_view(["POST"])

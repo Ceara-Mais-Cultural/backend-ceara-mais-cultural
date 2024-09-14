@@ -54,6 +54,9 @@ INSTALLED_APPS = [
 
 REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
 }
 
 APPEND_SLASH = True
@@ -70,14 +73,13 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", '192.168.0.10', '192.168.0.5', env("DEV_API_URL")]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "0.0.0.0", '192.168.0.10', env("DEV_API_URL")]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8081",
-    "exp://192.168.0.5:8081",
-    "http://192.168.0.5",
-    "http://192.168.0.8",
-    "http://192.168.0.9",
+    "http://localhost:8000",
+    "exp://192.168.0.10:8081",
+    "http://192.168.0.10",
     "https://" + env("DEV_API_URL"),
 ]
 CORS_ALLOW_ALL_ORIGINS = True

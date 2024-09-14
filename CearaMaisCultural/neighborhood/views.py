@@ -1,8 +1,8 @@
-from rest_framework import viewsets, mixins
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework import viewsets
 
 from .serializers import NeighborhoodSerializer
 from .models import Neighborhood
+from CearaMaisCultural.permissions import IsAdminOrReadOnly
 
 
 class NeighborhoodViewSet(viewsets.ModelViewSet):
@@ -12,4 +12,4 @@ class NeighborhoodViewSet(viewsets.ModelViewSet):
 
     queryset = Neighborhood.objects.all().order_by("id")
     serializer_class = NeighborhoodSerializer
-    # authentication_classes = [SessionAuthentication, TokenAuthentication]
+    permission_classes = [IsAdminOrReadOnly]

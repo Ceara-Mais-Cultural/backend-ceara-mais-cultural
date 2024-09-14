@@ -12,5 +12,5 @@ class EventViewSet(viewsets.ModelViewSet):
 
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    authentication_classes = [SessionAuthentication, TokenAuthentication]
+    asses = [SessionAuthentication, TokenAuthentication]
     # permission_classes = [permissions.IsAuthenticated]
