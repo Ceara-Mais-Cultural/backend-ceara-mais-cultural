@@ -1,4 +1,4 @@
-from rest_framework import viewsets, status, permissions
+from rest_framework import viewsets, status
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -8,6 +8,7 @@ from user.models import User
 from .models import Project, ProjectVote
 from .filters import ProjectFilter
 from .serializers import ProjectSerializer, ProjectVoteSerializer
+from CearaMaisCultural.permissions import IsAdminUser, IsAuthenticatedOrCreate
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -19,7 +20,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_class = ProjectFilter
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrCreate]
     authentication_classes = [SessionAuthentication, TokenAuthentication]
 
     @action(detail=True, methods=["post"])
@@ -48,8 +49,6 @@ class ProjectViewSet(viewsets.ModelViewSet):
 
         return Response({"success": "Vote added successfully"})
 
-
-from CearaMaisCultural.permissions import IsAdminUser
 
 class ProjectVoteViewSet(viewsets.ModelViewSet):
     """
