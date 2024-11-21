@@ -49,7 +49,7 @@ class DeleteUserView(APIView):
             user = authenticate(username=email, password=password)
             if user:
                 user.delete()
-                return redirect("reset_successful")
+                return redirect("user_deleted")
             else:
                 return render(
                     request,
